@@ -1,10 +1,12 @@
-import { Col, Row, Table } from "antd";
+import { Col, Flex, Row, Table } from "antd";
 import { useEffect, useState } from "react";
 import { 匯率 } from "./utils/data";
 import MyUpload from "./MyUpload";
+import MyRate from "./MyRate";
 
 export default function App() {
   const [uploadData, setUploadData] = useState([]);
+  const [rateData, setRateData] = useState({} || 匯率);
   const [api, setApi] = useState([]);
   const columns = [
     { dataIndex: "rocYear", title: "民國年", key: "rocYear", align: "center" },
@@ -25,6 +27,13 @@ export default function App() {
     console.log(v);
     setUploadData(v);
   };
+  const callRate = (v) => {
+    let obj = {};
+    v.forEach((item) => {
+      obj[item.currency] = item.rate;
+    });
+    setRateData(obj);
+  };
   useEffect(() => {
     const obj = {};
     Array.from({ length: 100 }).forEach((_, index) => {
@@ -44,7 +53,7 @@ export default function App() {
         const premium = list.filter((item) => item.currentType);
         premium.forEach((item) => {
           if (item.currentType !== "TWD") {
-            const rate = 匯率?.[item.currentType] || 1;
+            const rate = rateData?.[item.currentType] || 1;
             insertExpend(item.values, Number.parseFloat(rate));
           } else {
             insertExpend(item.values, 1);
@@ -69,7 +78,7 @@ export default function App() {
         repay.forEach((item) => {
           const insertName = item.customerName.startsWith("本") ? "selfIncome" : "spouseIncome";
           if (item.currentType !== "TWD") {
-            const rate = 匯率?.[item.currentType] || 1;
+            const rate = rateData?.[item.currentType] || 1;
             insertIncome(item.values, Number.parseFloat(rate), insertName);
           } else {
             insertIncome(item.values, 1, insertName);
@@ -94,12 +103,15 @@ export default function App() {
       console.log(Object.values(obj));
       setApi(Object.values(obj));
     }
-  }, [uploadData]);
+  }, [uploadData, rateData]);
   return (
     <div style={{ width: "100%", maxWidth: "1400px", margin: "0 auto" }}>
-      <Row>
+      <Row gutter={[12, 12]}>
         <Col span={24}>
-          <MyUpload onSuccess={callSuccess} />
+          <Flex gap={"large"}>
+            <MyRate onSuccess={callRate} />
+            <MyUpload onSuccess={callSuccess} />
+          </Flex>
         </Col>
         <Col span={24}>
           <Table

@@ -2,7 +2,7 @@ import React from "react";
 import { Upload, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
-export default function MyUpload({ onSuccess }) {
+export default function MyRate({ onSuccess }) {
   const props = {
     name: "file",
     accept: ".json", // 限制只能選取 json 檔案
@@ -44,7 +44,7 @@ export default function MyUpload({ onSuccess }) {
 
   return (
     <Upload {...props}>
-      <Button icon={<UploadOutlined />}>點擊上傳 健診 檔案</Button>
+      <Button icon={<UploadOutlined />}>點擊上傳 匯率 檔案</Button>
     </Upload>
   );
 }
