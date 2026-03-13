@@ -1,6 +1,6 @@
 import { Col, Row, Table } from "antd";
 import { useEffect, useState } from "react";
-import { 匯率, apiData } from "./utils/data";
+import { 匯率 } from "./utils/data";
 import MyUpload from "./MyUpload";
 
 export default function App() {
