@@ -6,7 +6,7 @@ import MyRate from "./MyRate";
 
 export default function App() {
   const [uploadData, setUploadData] = useState([]);
-  const [rateData, setRateData] = useState({} || 匯率);
+  const [rateData, setRateData] = useState(匯率);
   const [api, setApi] = useState([]);
   const columns = [
     { dataIndex: "rocYear", title: "民國年", key: "rocYear", align: "center" },
