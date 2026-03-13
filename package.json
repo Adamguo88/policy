@@ -2,6 +2,7 @@
   "name": "policy",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://adamguo88.github.io/policy/",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
