@@ -65,7 +65,7 @@ export default function App() {
         list.forEach((item) => {
           const yearData = obj[item.rocYear];
           if (yearData) {
-            const newValue = Math.round(Number.parseInt(item.value) * Number.parseFloat(rate));
+            const newValue = Math.round(Number.parseFloat(item.value) * rate);
             const total = Number.parseInt(yearData.expend1) + newValue;
             obj[item.rocYear] = { ...yearData, expend1: total };
           }
@@ -90,7 +90,7 @@ export default function App() {
         list.forEach((item) => {
           const yearData = obj[item.rocYear];
           if (yearData) {
-            const newValue = Math.round(Number.parseInt(item.value) * Number.parseFloat(rate));
+            const newValue = Math.round(Number.parseFloat(item.value) * rate);
             const total = Number.parseInt(yearData?.[name]) + newValue;
             obj[item.rocYear] = { ...yearData, [name]: total };
           }
